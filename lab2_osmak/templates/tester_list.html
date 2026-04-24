@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Testers{% endblock %}
+
+{% block content %}
+<h1>Testers</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Experience (years)</th>
+                <th>Test Results Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tester in testers %}
+            <tr>
+                <td>{{ tester.id }}</td>
+                <td>{{ tester.user.name }}</td>
+                <td>{{ tester.user.email }}</td>
+                <td>{{ tester.experience_years or 'N/A' }}</td>
+                <td>{{ tester.test_results|length }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Edit' if testcase else 'Create' }} Test Case{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>{{ 'Edit' if testcase else 'Create' }} Test Case</h1>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ testcase.name if testcase else '' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3">{{ testcase.description if testcase else '' }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="test_plan_id" class="form-label">Test Plan</label>
+                        <select class="form-select" id="test_plan_id" name="test_plan_id" required>
+                            <option value="">Select Test Plan</option>
+                            {% for plan in test_plans %}
+                            <option value="{{ plan.id }}" {{ 'selected' if testcase and testcase.test_plan_id == plan.id else '' }}>
+                                {{ plan.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">{{ 'Update' if testcase else 'Create' }}</button>
+                        <a href="/testcases" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

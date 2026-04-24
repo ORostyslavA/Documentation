@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Test Plans{% endblock %}
+
+{% block content %}
+<h1>Test Plans</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Test Cases Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for plan in testplans %}
+            <tr>
+                <td>{{ plan.id }}</td>
+                <td>{{ plan.name }}</td>
+                <td>{{ plan.description or 'N/A' }}</td>
+                <td>{{ plan.created_at.strftime('%Y-%m-%d') if plan.created_at else 'N/A' }}</td>
+                <td>{{ plan.test_cases|length }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
