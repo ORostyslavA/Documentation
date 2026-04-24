@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Test Cases{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Test Cases</h1>
+    <a href="/testcases/new" class="btn btn-primary">Add New Test Case</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Test Plan</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for testcase in testcases %}
+            <tr>
+                <td>{{ testcase.id }}</td>
+                <td>{{ testcase.name }}</td>
+                <td>{{ testcase.description or 'N/A' }}</td>
+                <td>{{ testcase.test_plan.name if testcase.test_plan else 'N/A' }}</td>
+                <td>
+                    <a href="/testcases/{{ testcase.id }}" class="btn btn-sm btn-info">View</a>
+                    <a href="/testcases/{{ testcase.id }}/edit" class="btn btn-sm btn-warning">Edit</a>
+                    <form method="POST" action="/testcases/{{ testcase.id }}/delete" style="display: inline;">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
