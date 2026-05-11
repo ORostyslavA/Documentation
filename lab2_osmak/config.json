@@ -1,0 +1,7 @@
+{
+    "output_strategy": "console",
+    "kafka": {
+        "bootstrap_servers": "localhost:9092",
+        "topic": "data_import_logs"
+    }
+}

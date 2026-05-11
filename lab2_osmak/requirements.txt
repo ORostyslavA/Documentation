@@ -1,0 +1,8 @@
+sqlalchemy
+alembic
+pandas
+faker
+firebase-admin
+firebase-admin==6.5.0
+itsdangerous==2.2.0
+kafka-python

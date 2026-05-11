@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Test Case Details{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Test Case: {{ testcase.name }}</h1>
+    <div>
+        <a href="/testcases/{{ testcase.id }}/edit" class="btn btn-warning">Edit</a>
+        <a href="/testcases" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Details</h5>
+        <p><strong>ID:</strong> {{ testcase.id }}</p>
+        <p><strong>Name:</strong> {{ testcase.name }}</p>
+        <p><strong>Description:</strong> {{ testcase.description or 'N/A' }}</p>
+        <p><strong>Test Plan:</strong> {{ testcase.test_plan.name if testcase.test_plan else 'N/A' }}</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h3>Test Steps</h3>
+    <ul class="list-group">
+        {% for step in testcase.test_steps %}
+        <li class="list-group-item">
+            <strong>Step {{ step.step_number }}:</strong> {{ step.description }}<br>
+            <small class="text-muted">Expected: {{ step.expected_result }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="mt-4">
+    <h3>Test Results</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tester</th>
+                    <th>Status</th>
+                    <th>Executed At</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in testcase.test_results %}
+                <tr>
+                    <td>{{ result.tester.user.name if result.tester else 'N/A' }}</td>
+                    <td>
+                        <span class="badge bg-{{ 'success' if result.status.value == 'passed' else 'danger' if result.status.value == 'failed' else 'warning' }}">
+                            {{ result.status.value }}
+                        </span>
+                    </td>
+                    <td>{{ result.executed_at.strftime('%Y-%m-%d %H:%M') if result.executed_at else 'N/A' }}</td>
+                    <td>{{ result.notes or 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

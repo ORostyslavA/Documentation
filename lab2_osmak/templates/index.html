@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Test Case Management System</h1>
+    <p class="lead">Manage your testing process with ease. View, create, edit, and delete test cases.</p>
+    <hr class="my-4">
+    <p>Navigate to the sections using the menu above.</p>
+    <a class="btn btn-primary btn-lg" href="/testcases" role="button">View Test Cases</a>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Test Cases</h5>
+                <p class="card-text">Manage test cases with full CRUD operations.</p>
+                <a href="/testcases" class="btn btn-primary">Go to Test Cases</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Test Plans</h5>
+                <p class="card-text">View test plans and their associated test cases.</p>
+                <a href="/testplans" class="btn btn-primary">Go to Test Plans</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Testers</h5>
+                <p class="card-text">View information about testers and their experience.</p>
+                <a href="/testers" class="btn btn-primary">Go to Testers</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
