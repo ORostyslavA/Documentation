@@ -1,0 +1,29 @@
+output:
+  strategy: kafka
+
+firebase:
+  database_url: "https://docs-lab4-default-rtdb.firebaseio.com"
+  credentials_path: "config/docs-lab4-firebase-adminsdk-fbsvc-c12d5a1ba8.json"
+  root_node: "311_request_data3"
+  write_mode: "set"
+  batch_size: 100
+
+dataset:
+  url: "https://data.cityofnewyork.us/api/v3/views/erm2-nwe9/query.json"
+  local_path: "data/311_request.csv"
+  limit: 500
+
+kafka:
+  bootstrap_servers: "localhost:9092"
+  topic: "311_request_data"
+  client_id: "311_request_producer"
+  message_format: "json"
+
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: null
+  key_prefix: "311_request"
+  ttl: null
+  storage_type: "list"
